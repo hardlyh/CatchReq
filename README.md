@@ -7,10 +7,10 @@ SpringBoot 捕捉请求的小插件
 
 - ```
   		<dependency>
-  			<groupId>com.catchreq</groupId>
-  			<artifactId>catch</artifactId>
-  			<version>1.0.1</version>
-  		</dependency>
+    			<groupId>com.catchreq</groupId>
+    			<artifactId>catch</artifactId>
+    			<version>1.0.1</version>
+    		</dependency>
   ```
 
 - 配置filter新建配置类
@@ -31,6 +31,8 @@ SpringBoot 捕捉请求的小插件
   ```
 
 - 在主项目配置@ServletComponentScan注解
+
+- 访问路径 http://xxx.xxx.xxx.xx:xxxx/reqCatch.html
 
 ### 界面演示
 
