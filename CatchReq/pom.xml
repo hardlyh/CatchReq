@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.catchreq</groupId>
 	<artifactId>catch</artifactId>
-	<version>1.0.1</version>
+	<version>1.0.4</version>
 	<name>catch</name>
 	<description>Demo project for Spring Boot</description>
 
@@ -52,4 +52,20 @@
 		</plugins>
 	</build>
 	
+	<distributionManagement>
+		<!--正式版本 -->
+		<repository>
+			<!-- nexus服务器中用户名：在settings.xml中<server>的id -->
+			<id>nexus-releases</id>
+			<!-- 这个名称自己定义 -->
+			<name>Release repository</name>
+			<url>http://192.168.1.241:8088/repository/maven-releases/</url>
+		</repository>
+		<!--快照 -->
+		<snapshotRepository>
+			<id>nexus-snapshots</id>
+			<name>Snapshots repository</name>
+			<url>http://192.168.1.241:8088/repository/maven-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
 </project>

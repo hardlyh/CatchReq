@@ -31,6 +31,7 @@ public class CatrhReqFilter implements Filter {
 
 		String method = req.getMethod();
 		StringBuffer url = req.getRequestURL();
+		String requestURI = req.getRequestURI();
 		
 		String[] split = url.toString().split("\\.");
 
@@ -67,7 +68,7 @@ public class CatrhReqFilter implements Filter {
 			paramMap.put(paramName, paramValue);
 		}
 
-		ReqDto dto = new ReqDto(url.toString(), url.toString(), method, paramMap, headerMap);
+		ReqDto dto = new ReqDto(url.toString(), requestURI, method, paramMap, headerMap);
 		SaveEntity mapper = SaveEntity.Instance();
 		mapper.save(dto);
 		chain.doFilter(request, response);

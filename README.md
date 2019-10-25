@@ -9,7 +9,7 @@ SpringBoot 捕捉请求的小插件
   		<dependency>
     			<groupId>com.catchreq</groupId>
     			<artifactId>catch</artifactId>
-    			<version>1.0.1</version>
+    			<version>1.0.1</version>  <!-- 具体版本号需要查看项目中 -->
     		</dependency>
   ```
 
@@ -33,6 +33,12 @@ SpringBoot 捕捉请求的小插件
 - 在主项目配置@ServletComponentScan注解
 
 - 访问路径 http://xxx.xxx.xxx.xx:xxxx/reqCatch.html
+
+- 如果有拦截器的话,需要放过一下路径
+
+    - /catchweb/*  静态资源
+    - /reqCatchGetAll  获取数据
+    - /reqCatch.html   UI
 
 ### 界面演示
 
