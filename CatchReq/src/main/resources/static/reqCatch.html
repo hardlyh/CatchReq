@@ -2,24 +2,23 @@
 <html lang="zh-CN">
 
 <head>
-<meta charset="UTF-8">
-<title>Catch Request UI</title>
-<link type="text/css" rel="styleSheet"
-	href="./catchweb/css/bootstrap.css" />
-<script src='./catchweb/js/jquery-3.4.1.min.js' type='text/javascript'></script>
-<script src='./catchweb/js/bootstrap.js' type='text/javascript'></script>
-<script src='./catchweb/js/Request.js' type='text/javascript'></script>
-<script src='./catchweb/js/hipay.js' type='text/javascript'></script>
-<script src='./catchweb/js/vue.js' type='text/javascript'></script>
-<script src='./catchweb/js/axios.min.js' type='text/javascript'></script>
-<!--     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
-<!--     <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script> -->
+	<meta charset="UTF-8">
+	<title>Catch Request UI</title>
+	<link type="text/css" rel="styleSheet" href="./catchweb/css/bootstrap.css" />
+	<script src='./catchweb/js/jquery-3.4.1.min.js' type='text/javascript'></script>
+	<script src='./catchweb/js/bootstrap.js' type='text/javascript'></script>
+	<script src='./catchweb/js/Request.js' type='text/javascript'></script>
+	<script src='./catchweb/js/hipay.js' type='text/javascript'></script>
+	<script src='./catchweb/js/vue.js' type='text/javascript'></script>
+	<script src='./catchweb/js/axios.min.js' type='text/javascript'></script>
+	<!--     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+	<!--     <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script> -->
 
-<style type="text/css">
-.center-block {
-	text-align: center;
-}
-</style>
+	<style type="text/css">
+		.center-block {
+			text-align: center;
+		}
+	</style>
 </head>
 
 <body>
@@ -29,45 +28,53 @@
 			<div class="col-md-2">
 				<div class="panel panel-default">
 					<div class="panel-heading">请求列表</div>
-					<div class="panel-body" v-for='(req,index) in reqList'
-						:value='index' @click='clickReq(req)'>{{req.targetMethod}}</div>
+					<div class="panel-body" v-for='(req,index) in reqList' :value='index' @click='clickReq(req)'>
+						{{req.targetMethod}}</div>
 				</div>
 
 			</div>
 			<div class="col-md-10">
 				<div class="col-md-12">
-					URI: &nbsp; &nbsp;{{selectReq.targetMethod}}&nbsp; &nbsp;&nbsp; &nbsp;<span
-						class="label label-primary">URI</span>
-				</div>
-				<div class="col-md-12">
-					URL: &nbsp; &nbsp;{{selectReq.targetUrl}}&nbsp; &nbsp;&nbsp; &nbsp;<span
-						class="label label-primary">URL</span>
-				</div>
-				<div class="col-md-12">
-					访问方式: &nbsp; &nbsp;{{selectReq.mehtod}}&nbsp; &nbsp;&nbsp; &nbsp;<span
-						class="label label-primary">get/post</span>
-				</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-1"> URI:</div>
+							<div class="col-md-5"><input class="form-control" v-model='selectReq.targetMethod' /> </div>
+						</div>
+						<div class="col-md-12">
+							<div class="col-md-1"> URL:</div>
+							<div class="col-md-5"><input class="form-control" v-model='selectReq.targetUrl' /></div>
+						</div>
+						<div class="col-md-12">
+							<div class="col-md-1"> 访问方式:</div>
+							<div class="col-md-5"><input class="form-control" v-model='selectReq.mehtod' /></div>
+						</div>
 
-				<div class="col-md-12">
-					header
-					<div class="col-md-12">
-						<div class="input-group"
-							v-for='(headV,headK,index) in selectReq.headersMap' :key='index'>
-							<span class="input-group-addon" id="basic-addon1">{{headK}}</span>
-							<input type="text" class="form-control"
-								v-model='selectReq.headersMap[headK]' placeholder="Username"
-								aria-describedby="basic-addon1">
+						<div class="col-md-12">
+							<div class="col-md-12">
+								header
+							</div>
+							<div class="input-group" v-for='(headV,headK,index) in selectReq.headersMap' :key='index'>
+								<span class="input-group-addon" id="basic-addon1">{{headK}}</span>
+								<div style="width:90%">
+									<input type="text" class="form-control" v-model='selectReq.headersMap[headK]'
+										aria-describedby="basic-addon1">
+								</div>
+								<button type="button" class="btn btn-default" aria-label="Left Align"
+									@click='removeHeader(headK)'>
+									<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+								</button>
+							</div>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-12">
-					pararm
 					<div class="col-md-12">
-						<div class="input-group"
-							v-for='(headV,headK) in selectReq.paramMap'>
+						pararm
+					</div>
+					<div class="col-md-12">
+						<div class="input-group" v-for='(headV,headK) in selectReq.paramMap'>
 							<span class="input-group-addon" id="basic-addon1">{{headK}}</span>
-							<input type="text" class="form-control"
-								v-model='selectReq.paramMap[headK]' placeholder="Username"
+							<input type="text" class="form-control" v-model='selectReq.paramMap[headK]'
 								aria-describedby="basic-addon1">
 						</div>
 					</div>
@@ -77,8 +84,8 @@
 				</div>
 				<div class="col-md-12">
 					返回参数:
-					<div class="col-md-12 pre-scrollable"
-						style="border: 1px solid; height: 600px;">{{responseT}}</div>
+					<div class="col-md-12 pre-scrollable" style="border: 1px solid; height: 600px;">
+						{{responseT}}</div>
 				</div>
 			</div>
 

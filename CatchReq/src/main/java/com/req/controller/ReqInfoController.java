@@ -27,8 +27,9 @@ public class ReqInfoController {
 		return all;
 	}
 	
-	@PostMapping("sendReqCatchReq")
+	@GetMapping("sendReqCatchReq")
 	public String sendReqCatchReq() {
 		return "访问成功";
 	}
+	
 }

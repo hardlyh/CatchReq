@@ -74,6 +74,10 @@ $(function () {
             getBaseUrl:function(){
                 var urlMatches = /(.*)\/reqCatch.html.*/.exec(window.location.href);
                 this.baseUrl = urlMatches[1];
+            },
+            removeHeader:function(key){
+                alert("remove");
+                alert(key);
             }
         },
         mounted: function () {

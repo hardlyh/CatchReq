@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.stereotype.Component;
 
-//@Component
-//@ServletComponentScan
+@Component
+@ServletComponentScan
 public class CORSFilter implements Filter {
 
 	@Override
